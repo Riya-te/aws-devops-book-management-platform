@@ -58,6 +58,8 @@ sudo tee /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json > /de
             "log_group_name": "codedeploy-agent-logs-backend",
             "log_stream_name": "{instance_id}-codedeploy-agent-deployment-log"
           },
+
+          //code app-tier
           {
             "file_path": "/tmp/codedeploy-agent.update.log",
             "log_group_name": "codedeploy-agent-logs-backend",
