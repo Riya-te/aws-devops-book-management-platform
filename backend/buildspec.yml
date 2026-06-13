@@ -48,15 +48,7 @@ phases:
 post_build:
   commands:
     - echo "Deploying backend using AWS Systems Manager"
-
-    - |
-      aws ssm send-command \
-      --document-name "AWS-RunShellScript" \
-      --targets "Key=tag:Role,Values=AppTier" \
-      --comment "Deploy backend application" \
-      --parameters commands="cd /home/ec2-user && rm -rf aws-devops-book-management-platform && git clone https://github.com/Riya-te/aws-devops-book-management-platform.git && cd aws-devops-book-management-platform/backend && npm install && pm2 delete all || true && pm2 start server.js --name backend && pm2 save" \
-      --region ap-south-1
-
+    - aws ssm send-command --document-name AWS-RunShellScript --targets Key=tag:Role,Values=AppTier --parameters commands="cd /home/ec2-user && rm -rf aws-devops-book-management-platform && git clone https://github.com/Riya-te/aws-devops-book-management-platform.git && cd aws-devops-book-management-platform/backend && npm install && pm2 delete all || true && pm2 start server.js --name backend && pm2 save" --region ap-south-1
     - echo "SSM deployment command sent successfully"
 artifacts:
   files:
