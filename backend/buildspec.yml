@@ -45,7 +45,7 @@ phases:
       - echo "Environment variables have been saved to .env"
       - cd ..
 
- post_build:
+post_build:
   commands:
     - echo "Deploying backend using AWS Systems Manager"
 
