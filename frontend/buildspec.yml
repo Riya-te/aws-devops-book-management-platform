@@ -21,13 +21,13 @@ phases:
     commands:
       - echo Building the React app...
       - npm run build
-  post_build:
-    commands:
-      - echo Build completed. Preparing artifacts for deployment
-      - echo Copying appspec.yml to dist directory...
-      - cp appspec.yml dist/ || echo "Failed to copy appspec.yml"
-      - echo Copying scripts directory to dist directory...
-      - cp -R scripts/ dist/ || echo "Failed to copy scripts directory"
+post_build:
+  commands:
+    - echo "Build completed. Deploying frontend using AWS Systems Manager"
+
+    - aws ssm send-command --document-name AWS-RunShellScript --targets Key=tag:Role,Values=WebTier --parameters commands="sudo dnf install -y git nodejs && cd /home/ec2-user && rm -rf aws-devops-book-management-platform && git clone https://github.com/Riya-te/aws-devops-book-management-platform.git && cd aws-devops-book-management-platform/frontend && npm install && npm run build && sudo rm -rf /usr/share/nginx/html/* && sudo cp -r dist/* /usr/share/nginx/html/ && sudo systemctl restart nginx" --region ap-south-1
+
+    - echo "Frontend deployment command sent successfully"
 artifacts:
   files:
     - '**/*'
