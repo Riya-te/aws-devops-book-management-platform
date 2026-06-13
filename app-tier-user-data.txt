@@ -6,7 +6,7 @@ sudo yum update -y
 curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash - 
 sudo yum install -y nodejs 
 
-# Install PM2 globally 
+# Install PM2 globally  
 sudo npm install -g pm2 
 
 # Define the log directory and ensure it exists 
@@ -14,7 +14,7 @@ LOG_DIR="/var/log/react-node-mysql-app/backend"
 mkdir -p $LOG_DIR 
 sudo chown -R root:root $LOG_DIR
 
-# Create the combined.log file
+# Create the combined.log file in the page 
 sudo touch $LOG_DIR/combined.log
 sudo chown root:root $LOG_DIR/combined.log  # Set ownership to root
 
